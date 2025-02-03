@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Professionnel - Worklink</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Photo de profil">
+                        </div>
+                        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                        <p class="text-muted">Professionnel</p>
+                        <div class="d-flex justify-content-center align-items-center mb-2">
+                            <i class="bi bi-star-fill text-warning me-1"></i>
+                            <span class="fw-bold">4.8</span>
+                            <span class="text-muted ms-1">(127 avis)</span>
+                        </div>
+                        <button class="btn btn-outline-success btn-sm">Modifier la photo</button>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            <i class="bi bi-person-circle me-2"></i>Profil
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-calendar2-week me-2"></i>Planning
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-clock-history me-2"></i>Missions
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-cash-coin me-2"></i>Revenus
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-gear me-2"></i>Paramètres
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action text-danger">
+                            <i class="bi bi-box-arrow-right me-2"></i>Déconnexion
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <!-- Informations personnelles -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Informations personnelles</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Prénom</label>
+                                    <input type="text" class="form-control" value="{{ user.first_name }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Nom</label>
+                                    <input type="text" class="form-control" value="{{ user.last_name }}" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="{{ user.email }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" value="{{ user.phone }}" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Ville</label>
+                                    <input type="text" class="form-control" value="{{ user.city }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">CIN</label>
+                                    <input type="text" class="form-control" value="{{ user.cin }}" readonly>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Informations professionnelles -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Informations professionnelles</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Services proposés</label>
+                                <input type="text" class="form-control" value="{{ user.professional_profile[0].services }}" readonly>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Années d'expérience</label>
+                                    <input type="number" class="form-control" value="{{ user.professional_profile[0].experience }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Disponibilité</label>
+                                    <input type="text" class="form-control" value="{{ user.professional_profile[0].availability }}" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Certifications</label>
+                                <input type="text" class="form-control" value="{{ user.professional_profile[0].certifications }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" rows="3" readonly>{{ user.professional_profile[0].description }}</textarea>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Numéro d'immatriculation</label>
+                                    <input type="text" class="form-control" value="{{ user.professional_profile[0].registration_number }}" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Numéro d'assurance</label>
+                                    <input type="text" class="form-control" value="{{ user.professional_profile[0].insurance_number }}" readonly>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success">Modifier les informations</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Statistiques -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Statistiques</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center mb-3">
+                                <h6 class="text-muted">Missions complétées</h6>
+                                <h3 class="text-success">156</h3>
+                            </div>
+                            <div class="col-md-3 text-center mb-3">
+                                <h6 class="text-muted">Note moyenne</h6>
+                                <h3 class="text-warning">4.8</h3>
+                            </div>
+                            <div class="col-md-3 text-center mb-3">
+                                <h6 class="text-muted">Taux de satisfaction</h6>
+                                <h3 class="text-info">98%</h3>
+                            </div>
+                            <div class="col-md-3 text-center mb-3">
+                                <h6 class="text-muted">Missions en cours</h6>
+                                <h3 class="text-primary">3</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

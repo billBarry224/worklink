@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Bouton pour ouvrir le modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#authModal">
+    Connexion/Inscription
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="authModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login">Connexion</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#register">Inscription</button>
+                    </li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <div class="modal-body">
+                <form method="POST" action="{{ url_for('auth') }}">
+                    <!-- Connexion -->
+                    <div class="tab-pane fade show active" id="login">
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                        </div>
+                        <button type="submit" name="login" class="btn btn-success">Se connecter</button>
+                    </div>
+
+                    <!-- Inscription -->
+                    <div class="tab-pane fade" id="register">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" name="firstName" class="form-control" placeholder="Prénom" required>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="lastName" class="form-control" placeholder="Nom" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" name="phone" class="form-control" placeholder="Téléphone" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="city" class="form-control" placeholder="Ville" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="cin" class="form-control" placeholder="CIN" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                        </div>
+                        
+                        <!-- Choix Professionnel/Client -->
+                        <div class="mb-3">
+                            <select name="userType" class="form-select" id="userType" onchange="toggleProfessionalFields()">
+                                <option value="client">Client</option>
+                                <option value="professional">Professionnel</option>
+                            </select>
+                        </div>
+
+                        <!-- Champs professionnels (cachés par défaut) -->
+                        <div id="professionalFields" style="display: none;">
+                            <div class="mb-3">
+                                <label>Services proposés</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="services" value="Plomberie">
+                                    <label class="form-check-label">Plomberie</label>
+                                </div>
+                                <!-- Ajoutez d'autres services ici -->
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" name="experience" class="form-control" placeholder="Années d'expérience">
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" name="register" class="btn btn-primary">S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

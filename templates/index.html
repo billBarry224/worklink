@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worklink - Services Professionnels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    {% include 'header.html' %}
+
+    <!-- Modal d'authentification -->
+    <div class="modal fade" id="authModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <ul class="nav nav-tabs w-100">
+                        <li class="nav-item flex-fill">
+                            <button class="nav-link active w-100" data-bs-toggle="tab" data-bs-target="#login-tab">
+                                Se connecter
+                            </button>
+                        </li>
+                        <li class="nav-item flex-fill">
+                            <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#register-tab">
+                                S'inscrire
+                            </button>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <!-- Onglet Connexion -->
+                        <div class="tab-pane fade show active" id="login-tab">
+                            <form id="loginForm" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mot de passe</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">Se connecter</button>
+                            </form>
+                        </div>
+
+                        <!-- Onglet Inscription -->
+                        <div class="tab-pane fade" id="register-tab">
+                            <form id="registerForm" class="needs-validation" novalidate>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label">Prénom</label>
+                                        <input type="text" name="firstName" class="form-control" required>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Nom</label>
+                                        <input type="text" name="lastName" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="tel" name="phone" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ville</label>
+                                    <input type="text" name="city" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Numéro CIN</label>
+                                    <input type="text" name="cin" class="form-control" required>
+                                </div>
+
+                                <!-- Champs spécifiques aux professionnels -->
+                                <div id="professionalFields" style="display: none;">
+                                    <div class="mb-3">
+                                        <label class="form-label">Services proposés</label>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="services" value="Plomberie">
+                                                    <label class="form-check-label">Plomberie</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="services" value="Électricité">
+                                                    <label class="form-check-label">Électricité</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="services" value="Mécanique">
+                                                    <label class="form-check-label">Mécanique</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="services" value="Menuiserie">
+                                                    <label class="form-check-label">Menuiserie</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Années d'expérience</label>
+                                        <input type="number" name="experience" class="form-control" min="0">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Certifications</label>
+                                        <input type="text" name="certifications" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <textarea name="description" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Disponibilité</label>
+                                        <select name="availability" class="form-select">
+                                            <option value="">Sélectionnez...</option>
+                                            <option value="full-time">Temps plein</option>
+                                            <option value="part-time">Temps partiel</option>
+                                            <option value="weekends">Weekends uniquement</option>
+                                            <option value="flexible">Horaires flexibles</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Numéro d'immatriculation</label>
+                                        <input type="text" name="registrationNumber" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Numéro d'assurance</label>
+                                        <input type="text" name="insurance" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mot de passe</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">S'inscrire</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu de la page d'accueil -->
+    <!-- ... (le reste du contenu reste inchangé) ... -->
+
+    {% include 'footer.html' %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

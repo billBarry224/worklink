@@ -1,0 +1,41 @@
+/* Styles personnalisés */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.bi-tools {
+    font-size: 1.5rem;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: #198754;
+    border-bottom: 2px solid #198754;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+/* Styles pour les checkboxes */
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
